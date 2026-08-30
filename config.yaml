@@ -1,21 +1,21 @@
 agents:
   claude:
     instructions:
-      path: "C:/Users/ktjn/.claude/CLAUDE.md"
+      path: "~/.claude/CLAUDE.md"
       master: "CLAUDE.md"
-    skills_dir: "C:/Users/ktjn/.claude/skills"
+    skills_dir: "~/.claude/skills"
   codex:
     instructions:
-      path: "C:/Users/ktjn/.codex/AGENTS.md"
+      path: "~/.codex/AGENTS.md"
       master: "CLAUDE.md"
-    skills_dir: "C:/Users/ktjn/.codex/skills"
+    skills_dir: "~/.codex/skills"
   opencode:
     # no global instructions file found under ~/.config/opencode at migration time
-    skills_dir: "C:/Users/ktjn/.config/opencode/skills"
+    skills_dir: "~/.config/opencode/skills"
   junie:
     # Junie reads project-level .junie/guidelines.md, not a global instructions file;
     # no global instructions target configured.
-    skills_dir: "C:/Users/ktjn/.junie/skills"
+    skills_dir: "~/.junie/skills"
   pi:
     # UNCONFIRMED: no skills/ dir or AGENTS.md convention found under ~/.pi at
     # migration time (only ~/.pi/agent/{auth,git,npm,sessions,settings}). Fill in

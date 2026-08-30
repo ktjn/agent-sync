@@ -42,14 +42,14 @@ your agents and skill sources:
 agents:
   claude:
     instructions:
-      path: "C:/Users/you/.claude/CLAUDE.md"
+      path: "~/.claude/CLAUDE.md"
       master: "CLAUDE.md"
-    skills_dir: "C:/Users/you/.claude/skills"
+    skills_dir: "~/.claude/skills"
   codex:
     instructions:
-      path: "C:/Users/you/.codex/AGENTS.md"
+      path: "~/.codex/AGENTS.md"
       master: "CLAUDE.md"
-    skills_dir: "C:/Users/you/.codex/skills"
+    skills_dir: "~/.codex/skills"
 
 sources:
   - name: antfu-skills
