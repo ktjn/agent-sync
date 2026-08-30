@@ -1,3 +1,8 @@
+<!--
+Adapted from https://github.com/Anbeeld/AGENTS.md (MIT License, Copyright (c) 2026 Anbeeld).
+See https://github.com/Anbeeld/AGENTS.md/blob/main/LICENSE for the full license text.
+-->
+
 # Global Instructions
 
 Applies across projects. More local instructions may override anything here except the Boundaries section, which is invariant at this layer and yields only to an explicit higher-authority instruction.
