@@ -1,0 +1,48 @@
+agents:
+  claude:
+    instructions:
+      path: "C:/Users/ktjn/.claude/CLAUDE.md"
+      master: "CLAUDE.md"
+    skills_dir: "C:/Users/ktjn/.claude/skills"
+  codex:
+    instructions:
+      path: "C:/Users/ktjn/.codex/AGENTS.md"
+      master: "CLAUDE.md"
+    skills_dir: "C:/Users/ktjn/.codex/skills"
+  opencode:
+    # no global instructions file found under ~/.config/opencode at migration time
+    skills_dir: "C:/Users/ktjn/.config/opencode/skills"
+  junie:
+    # Junie reads project-level .junie/guidelines.md, not a global instructions file;
+    # no global instructions target configured.
+    skills_dir: "C:/Users/ktjn/.junie/skills"
+  pi:
+    # UNCONFIRMED: no skills/ dir or AGENTS.md convention found under ~/.pi at
+    # migration time (only ~/.pi/agent/{auth,git,npm,sessions,settings}). Fill in
+    # skills_dir / instructions once pi's actual convention is confirmed.
+    skills_dir: null
+sources:
+  - name: antfu-skills
+    url: "https://github.com/antfu/skills.git"
+    subdir: "skills"
+    mode: multi
+  - name: vercel-labs-skills
+    url: "https://github.com/vercel-labs/skills.git"
+    subdir: "skills"
+    mode: multi
+  - name: anthropics-skills
+    url: "https://github.com/anthropics/skills.git"
+    subdir: "skills"
+    mode: multi
+  - name: vercel-labs-agent-skills
+    url: "https://github.com/vercel-labs/agent-skills.git"
+    subdir: "skills"
+    mode: multi
+  - name: mattpocock-skills
+    url: "https://github.com/mattpocock/skills.git"
+    subdir: "skills"
+    mode: multi
+  - name: obra-superpowers
+    url: "https://github.com/obra/superpowers.git"
+    subdir: "skills"
+    mode: multi
