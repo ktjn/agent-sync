@@ -99,6 +99,11 @@ uv run agent_sync.py link                              # sync to all agents
   never silently overwritten; `link` reports `[CONFLICT]` and requires
   `--force`.
 
+## Credits
+
+`master/AGENTS.md`'s global instructions are adapted from
+[Anbeeld/AGENTS.md](https://github.com/Anbeeld/AGENTS.md).
+
 ## License
 
 [MIT](LICENSE)
