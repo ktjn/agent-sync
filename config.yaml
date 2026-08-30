@@ -2,12 +2,12 @@ agents:
   claude:
     instructions:
       path: "~/.claude/CLAUDE.md"
-      master: "CLAUDE.md"
+      master: "AGENTS.md"
     skills_dir: "~/.claude/skills"
   codex:
     instructions:
       path: "~/.codex/AGENTS.md"
-      master: "CLAUDE.md"
+      master: "AGENTS.md"
     skills_dir: "~/.codex/skills"
   opencode:
     # no global instructions file found under ~/.config/opencode at migration time
@@ -17,10 +17,16 @@ agents:
     # no global instructions target configured.
     skills_dir: "~/.junie/skills"
   pi:
-    # UNCONFIRMED: no skills/ dir or AGENTS.md convention found under ~/.pi at
-    # migration time (only ~/.pi/agent/{auth,git,npm,sessions,settings}). Fill in
-    # skills_dir / instructions once pi's actual convention is confirmed.
-    skills_dir: null
+    # Confirmed from @earendil-works/pi-coding-agent's bundled source: global
+    # instructions/skills live under its agent dir (~/.pi/agent by default,
+    # overridable via env), checking AGENTS.override.md > AGENTS.md >
+    # AGENTS.MD > CLAUDE.md > CLAUDE.MD for instructions. pi also
+    # auto-discovers ~/.agents/skills and ancestor .agents/skills dirs as a
+    # bonus source, but that's separate from this managed skills_dir.
+    instructions:
+      path: "~/.pi/agent/AGENTS.md"
+      master: "AGENTS.md"
+    skills_dir: "~/.pi/agent/skills"
 sources:
   - name: antfu-skills
     url: "https://github.com/antfu/skills.git"

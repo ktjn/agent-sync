@@ -1,9 +1,9 @@
 # agent-sync
 
 Keep instructions and skills in sync across multiple coding agents (Claude
-Code, Codex, opencode, Junie, ...) from one git-tracked master.
+Code, Codex, opencode, Junie, pi, ...) from one git-tracked master.
 
-- **One master, many agents.** `master/CLAUDE.md` is the canonical
+- **One master, many agents.** `master/AGENTS.md` is the canonical
   instructions file; each agent's own instructions file (`CLAUDE.md`,
   `AGENTS.md`, ...) is linked to it. `master/skills/<name>/` is the canonical
   copy of each skill; each agent's `skills/<name>` is linked to it.
@@ -43,12 +43,12 @@ agents:
   claude:
     instructions:
       path: "~/.claude/CLAUDE.md"
-      master: "CLAUDE.md"
+      master: "AGENTS.md"
     skills_dir: "~/.claude/skills"
   codex:
     instructions:
       path: "~/.codex/AGENTS.md"
-      master: "CLAUDE.md"
+      master: "AGENTS.md"
     skills_dir: "~/.codex/skills"
 
 sources:
