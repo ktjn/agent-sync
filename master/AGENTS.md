@@ -92,6 +92,7 @@ The main agent remains an active builder. It owns scoping, a substantive main tr
 
 ## Testing
 
+- When a test framework is already in place for the target code, write a failing test that captures the desired behavior before writing any implementation code; confirm it fails for the expected reason, then implement until it passes.
 - Preserve existing tests. Update tests when behavior changes. Do not silently change tested behavior.
 - Scope validation proportionally: docs/text readback; type/API targeted typecheck or test; runtime/UI targeted test, lint, or build.
 - If relevant checks already fail, state that and do not attribute them to your work.

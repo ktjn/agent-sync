@@ -27,6 +27,13 @@ agents:
       path: "~/.pi/agent/AGENTS.md"
       master: "AGENTS.md"
     skills_dir: "~/.pi/agent/skills"
+  antigravity:
+    # Antigravity discovers global rules under ~/.gemini/config/rules/ and
+    # global skills under ~/.gemini/config/skills/.
+    instructions:
+      path: "~/.gemini/config/rules/AGENTS.md"
+      master: "AGENTS.md"
+    skills_dir: "~/.gemini/config/skills"
 sources:
   - name: antfu-skills
     url: "https://github.com/antfu/skills.git"
