@@ -51,44 +51,25 @@ Gather evidence proportional to risk.
 - If local dependency or generated code is unreadable, check matching upstream docs or source before guessing.
 - Prefer executable or independent verification over self-review. A fresh test beats re-reading your own code.
 - State uncertainty when something cannot be confirmed.
-- if possible use a subagent with a fresh context for review
 
 Proceed once the execution path, constraints, and regression surface are clear enough for a minimal correct change. If not, ask or report the gap.
 
 ## Workflow
 
-1. Scope in the main agent — read files, trace execution paths, search patterns — until the execution path, shared constraints, and every independent track are clear enough to assign safely. A track is work that owns a distinct useful deliverable. This is bounded scoping, not a requirement to finish substantive work before delegating.
+1. Scope — read files, trace execution paths, search patterns — until the execution path, constraints, and regression surface are clear enough for a minimal correct change. Run independent read-only calls in parallel.
 2. Load available skills whose stated triggers match the task; do not load unrelated skills just in case.
 3. For non-trivial work, maintain the task/TODO tool as the live task plan:
    - mark work completed when it is actually done;
    - before doing substantive work that differs from the current task plan, update the plan to reflect the change;
    - keep unfinished, blocked, or superseded work represented accurately rather than forcing it to completed.
-4. Choose the matching execution route:
-   - Cheap read-only I/O that needs no independent reasoning or artifact ownership: keep it in the main agent and run independent calls in parallel.
-   - All other work with one coherent track, or tracks with dependency or shared-state conflicts: keep them in the main agent or run them in sequence. Where no parallel route is safe, delegate a single track only when context isolation, specialization, or risk reduction justifies the overhead.
-   - One independent side track plus useful non-conflicting main work: launch one subagent and continue the main track.
-   - Two or more useful independent side tracks: launch two or more subagents, dispatched concurrently.
-5. While subagents run, continue safe main work when useful non-conflicting work exists. Otherwise wait for the required result. Do not duplicate assigned work or create work solely to avoid idling.
-6. Synchronize before any decision or edit that depends on a subagent's result. Collect the required results, reconcile conflicts, and re-read targets whose state may have changed.
-7. Implement the smallest correct change.
-8. Discover validation commands from local tooling, then run the narrowest relevant check.
-
-Collapse these steps only for coupled, single-track work where the next step depends on the current finding.
+4. Implement the smallest correct change.
+5. Discover validation commands from local tooling, then run the narrowest relevant check.
 
 For review, debugging, or analysis requests, do not force code changes once findings are evidenced.
 
 ## Subagents
 
-Always use at least one subagent for substantive work, whenever the runtime provides a subagent capability. When possible, assign that subagent a separate model from the main agent to obtain an independent perspective; if model selection is unavailable, use the available subagent and state the limitation when it materially affects verification. For trivial one-line answers or tasks where no subagent capability is available, proceed directly.
-
-Use subagents to create real concurrency or to isolate work. Prefer splitting work into independent tracks over a single sequential track.
-
-The main agent remains an active builder. It owns scoping, a substantive main track when one exists, synthesis, dependency decisions, and final verification.
-
-- Every track must complete without another parallel track's results, conflicting writes, or uncontrolled shared mutable state. Do not split work solely to reach a count.
-- Give each subagent a bounded scope, the relevant context, its authority and write limits, and a concrete return artifact such as a specific answer, evidence list, or summary. Avoid open prompts such as "report findings" or "explore the codebase."
-- Do not delegate formatting, transformation, or generation of data already in main-agent context merely to avoid doing the work.
-- Treat a subagent's result as a claim: revalidate it against current state and never assume success. Late, stale, failed, or abandoned work is explicit residual, not a silent gap; stop a subagent whose work has become obsolete or cannot finish safely.
+Avoid using subagents.
 
 ## Testing
 
