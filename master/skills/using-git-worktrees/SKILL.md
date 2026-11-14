@@ -83,7 +83,7 @@ Follow this priority order. Explicit user preference always beats observed files
 git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
 ```
 
-**If NOT ignored:** Add the selected directory to .gitignore and verify it is ignored before proceeding. Leave that change uncommitted unless the user explicitly requested a commit.
+**If NOT ignored:** Add to .gitignore, commit the change, then proceed.
 
 **Why critical:** Prevents accidentally committing worktree contents to repository.
 
@@ -101,7 +101,22 @@ cd "$path"
 
 ## Step 2: Project Setup
 
-Inspect repository instructions, package-manager declarations, lockfiles, and existing setup scripts. Run the established setup command only when needed. Preserve lockfiles and use the repository's supported frozen/locked installation mode where available. Do not infer npm from package.json or Poetry from pyproject.toml alone, install a new package manager, or change dependencies merely to prepare a worktree.
+Auto-detect and run appropriate setup:
+
+```bash
+# Node.js
+if [ -f package.json ]; then npm install; fi
+
+# Rust
+if [ -f Cargo.toml ]; then cargo build; fi
+
+# Python
+if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+if [ -f pyproject.toml ]; then poetry install; fi
+
+# Go
+if [ -f go.mod ]; then go mod download; fi
+```
 
 ## Step 3: Verify Clean Baseline
 
@@ -136,7 +151,7 @@ Ready to implement <feature-name>
 | `worktrees/` exists | Use it (verify ignored) |
 | Both exist | Use `.worktrees/` |
 | Neither exists | Check instruction file, then default `.worktrees/` |
-| Directory not ignored | Update .gitignore and verify; commit only if requested |
+| Directory not ignored | Add to .gitignore + commit |
 | Permission error on create | Sandbox fallback, work in place |
 | Tests fail during baseline | Report failures + ask |
 | No package.json/Cargo.toml | Skip dependency install |

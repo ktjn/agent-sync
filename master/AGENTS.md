@@ -69,6 +69,14 @@ Proceed once the execution path, constraints, and regression surface are clear e
 
 For review, debugging, or analysis requests, do not force code changes once findings are evidenced.
 
+## Model Selection and Planning
+
+- For non-trivial work, prefer a more capable reasoning model to create a detailed plan grounded in repository evidence before implementation.
+- Make the plan usable as a handoff: state clear requirements, scope and non-goals, constraints, relevant files and interfaces, dependency-ordered steps, validation commands, and measurable exit criteria for each step and the overall task. Resolve material choices or mark them as blockers.
+- Prefer smaller, lower-cost models for implementing well-defined steps when their capabilities are sufficient. Give them the relevant context, requirements, and exit criteria; require verification evidence before marking a step complete.
+- Escalate ambiguity, unexpected failures, or changes to requirements or architecture to the more capable model for replanning. Do not relax requirements or exit criteria to fit the implementation model.
+- Keep planning proportional to the task; trivial edits do not need a model handoff. Use only available, authorized model-selection mechanisms; if switching is unavailable, state that limitation and follow the same planning and verification discipline with the current model.
+
 
 ## Skill Selection
 

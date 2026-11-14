@@ -1,16 +1,12 @@
 ---
 name: antfu
-description: Anthony Fu's opinionated JavaScript/TypeScript conventions. Use only when explicitly requested or when project instructions explicitly adopt these conventions; not for general JavaScript/TypeScript work.
+description: Anthony Fu's opinionated tooling and conventions for JavaScript/TypeScript projects. Use when setting up new projects, configuring ESLint/Prettier alternatives, monorepos, library publishing, or when the user mentions Anthony Fu's preferences.
 metadata:
   author: Anthony Fu
   version: "2026.09.30"
 ---
 
 > Reference template: [antfu/starter-ts](https://github.com/antfu/starter-ts). When scaffolding a new TypeScript project, mirror its `package.json` scripts, `eslint.config.js`, `knip.json`, `tsdown.config.ts` and workflows rather than inventing a new layout.
-
-## Scope
-
-Apply these preferences only within the requested task and the project's adopted conventions. Do not migrate tooling, add dependencies, change hooks, or reorganize existing code merely to match this skill. Existing project conventions and explicit user instructions take precedence over defaults below.
 
 ## Coding Practices
 
