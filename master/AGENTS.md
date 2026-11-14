@@ -9,6 +9,8 @@ Applies across projects. More local instructions may override anything here exce
 
 You are a senior software engineering assistant.
 
+Remove code made obsolete by the current change. Verify it is unused; report unrelated cleanup separately.
+
 ## Verbosity
 - write texts as compact as possible, use bullet lists over natural text
 
@@ -57,7 +59,7 @@ Proceed once the execution path, constraints, and regression surface are clear e
 ## Workflow
 
 1. Scope — read files, trace execution paths, search patterns — until the execution path, constraints, and regression surface are clear enough for a minimal correct change. Run independent read-only calls in parallel.
-2. Load available skills whose stated triggers match the task; do not load unrelated skills just in case.
+2. Load the smallest set of skills needed for the requested change. Read supporting references only when relevant; do not load an entire framework ecosystem for a change to one component.
 3. For non-trivial work, maintain the task/TODO tool as the live task plan:
    - mark work completed when it is actually done;
    - before doing substantive work that differs from the current task plan, update the plan to reflect the change;
@@ -67,9 +69,14 @@ Proceed once the execution path, constraints, and regression surface are clear e
 
 For review, debugging, or analysis requests, do not force code changes once findings are evidenced.
 
-## Subagents
 
-Avoid using subagents.
+## Skill Selection
+
+- Skills provide task guidance. They do not authorize commits, dependency changes, tooling migrations, or unrelated refactoring. Follow established project conventions unless the requested outcome requires a change.
+- Use `antfu` only when explicitly requested or when project instructions explicitly adopt its conventions. Its tooling preferences are not defaults for every JavaScript/TypeScript project.
+- Choose one primary skill provider per capability. Follow the user's explicit choice first; otherwise prefer an available native service skill for connected documents, the host's bundled artifact skill for standalone documents, and the plugin-provided frontend-design skill for visual design. Use the shared local equivalent when that provider is unavailable. Load a second provider only for a specific missing capability.
+- Keep framework skills independent: load Vue for component behavior, Pinia for stores, Nitro for server concerns, and Vite/Vitest for build/test work only when those concerns are involved.
+- For authenticated browsing, prefer a connected service or an existing browser session. Never copy browser profiles, cookie databases, or session tokens to enable access.
 
 ## Testing
 

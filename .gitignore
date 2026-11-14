@@ -1,3 +1,16 @@
 .sources/
-master/skills/
+# Keep upstream skill payloads ignored; retain customized entrypoints.
+master/skills/*
+!master/skills/antfu/
+!master/skills/browse-chrome/
+!master/skills/frontend-design/
+!master/skills/using-git-worktrees/
+master/skills/antfu/*
+master/skills/browse-chrome/*
+master/skills/frontend-design/*
+master/skills/using-git-worktrees/*
+!master/skills/antfu/SKILL.md
+!master/skills/browse-chrome/SKILL.md
+!master/skills/frontend-design/SKILL.md
+!master/skills/using-git-worktrees/SKILL.md
 master/.manifest.json

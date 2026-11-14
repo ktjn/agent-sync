@@ -17,11 +17,11 @@ Code, Codex, opencode, Junie, pi, Antigravity, ...) from one git-tracked master.
 - **Skills pulled from git sources.** Point at any repo with `SKILL.md` files
   (flat or nested under category folders) and pull/update/discover/adopt
   skills from it.
-- **Master content isn't versioned skill-by-skill in this repo.**
-  `master/skills/` is gitignored — it's synced *from* upstream sources
-  (`.skill-lock.json` records provenance), not authored here. What's tracked
-  is the tool, the config that says what to sync, and the hand-authored
-  instructions file.
+- **Upstream skill payloads are not versioned here.** Most content under
+  `master/skills/` is gitignored and supplied by upstream sources. Four customized
+  `SKILL.md` entrypoints (antfu, browse-chrome, frontend-design, and
+  using-git-worktrees) are exempted so local guidance can be reviewed and versioned
+  alongside the tool, configuration, and shared instructions.
 
 ## Requirements
 
@@ -88,6 +88,10 @@ uv run agent_sync.py link                              # sync to all agents
 ```
 
 ## Notes
+
+- Customized skill entrypoints contain local selection, scope, and safety guidance.
+  The current `pull`/`sync` commands replace skill folders and can overwrite these
+  customizations. Review and preserve local changes before updating their sources.
 
 - Windows symlinks require Developer Mode or an elevated shell. Without it,
   `link` falls back to tracked copies automatically — no action needed, but
