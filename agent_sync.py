@@ -12,8 +12,9 @@ gets:
 Per-skill (not whole-directory) linking so agent-local-only skills (e.g. a
 skill only installed for codex) are left untouched.
 
-Falls back to a tracked copy + hash when symlinks aren't permitted (no
-Developer Mode / admin on Windows).
+Falls back to NTFS junctions for skill dirs and hardlinks for instruction
+files on Windows (no Developer Mode / admin needed), then to a tracked copy
++ hash when neither is possible.
 
 Skill sources are git repos pulled into master/skills/<name>.
 """
@@ -35,6 +36,7 @@ MASTER_DIR = ROOT / "master"
 CONFIG_PATH = ROOT / "config.yaml"
 MANIFEST_PATH = MASTER_DIR / ".manifest.json"
 SOURCES_CACHE = ROOT / ".sources"
+IS_WINDOWS = os.name == "nt"
 
 
 # ---------- config / manifest ----------
@@ -132,19 +134,43 @@ def remove_any(path: Path) -> None:
     shutil.rmtree(path)  # real directory with content
 
 
+def make_junction(src: Path, dst: Path) -> bool:
+    """Create an NTFS junction dst -> src without requiring symlink privilege."""
+    try:
+        result = subprocess.run(
+            ["cmd", "/c", "mklink", "/J", str(dst), str(src)],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    except OSError:
+        return False
+    return result.returncode == 0 and os.path.lexists(dst) and is_link(dst)
+
+
 def link_one(src: Path, dst: Path) -> str:
-    """Make dst a symlink to src (or tracked copy on failure). Returns mode."""
+    """Make dst a symlink to src (or junction/hardlink/copy fallback). Returns mode."""
     dst.parent.mkdir(parents=True, exist_ok=True)
     remove_any(dst)
     try:
         dst.symlink_to(src, target_is_directory=src.is_dir())
         return "symlink"
     except OSError:
-        if src.is_dir():
-            shutil.copytree(src, dst)
-        else:
-            shutil.copy2(src, dst)
-        return "copy"
+        pass
+    remove_any(dst)
+    if IS_WINDOWS:
+        if src.is_dir() and make_junction(src, dst):
+            return "junction"
+        if src.is_file():
+            try:
+                os.link(src, dst)
+                return "hardlink"
+            except OSError:
+                pass
+    if src.is_dir():
+        shutil.copytree(src, dst)
+    else:
+        shutil.copy2(src, dst)
+    return "copy"
 
 
 # ---------- link command ----------
@@ -220,6 +246,13 @@ def _status_one(label: str, target_path: Path, src: Path, manifest: dict) -> Non
             print(f"STALE     {label:40s} {target_path} -> {resolved}, expected {src}")
         return
     entry = manifest.get(str(target_path))
+    if entry and entry.get("mode") == "hardlink":
+        try:
+            if os.path.samefile(target_path, src):
+                print(f"OK(hardlink) {label:37s} {target_path}")
+                return
+        except OSError:
+            pass
     current_hash = hash_path(target_path)
     master_hash = hash_path(src)
     if current_hash == master_hash:

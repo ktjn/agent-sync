@@ -10,10 +10,11 @@ Code, Codex, opencode, Junie, pi, Antigravity, ...) from one git-tracked master.
 - **Per-skill linking, not whole-directory.** Skills installed only for one
   agent (e.g. a codex-specific plugin) are left alone — only skills present in
   master get linked out.
-- **Symlink with copy fallback.** Tries a real symlink first; falls back to a
-  tracked copy + content hash when the OS/permissions don't allow symlinks
-  (e.g. Windows without Developer Mode/admin). Fallback copies are detected as
-  drifted (`status`) once master changes, and refreshed on the next `link`.
+- **Symlink with fallbacks.** Tries a real symlink first; on Windows without
+  Developer Mode/admin it uses an NTFS junction for skill dirs and a hardlink
+  for the instructions file (same volume), then a tracked copy + content hash
+  as a last resort. Copies are detected as drifted (`status`) once master
+  changes, and refreshed on the next `link`.
 - **Skills pulled from git sources.** Point at any repo with `SKILL.md` files
   (flat or nested under category folders) and pull/update/discover/adopt
   skills from it.
@@ -62,7 +63,7 @@ sources:
 
 | Command | What it does |
 |---|---|
-| `link [--agent NAME] [--force]` | Symlink/copy each agent's instructions + skills from master. `--force` overwrites a drifted instructions file. |
+| `link [--agent NAME] [--force]` | Symlink/junction/hardlink/copy each agent's instructions + skills from master. `--force` overwrites a drifted instructions file. |
 | `status [--agent NAME]` | Show link/copy/drift state per agent. |
 | `diff <agent> [--skill NAME]` | Diff an agent's instructions (or one skill) against master. |
 | `pull [--source NAME] [--add SKILL]` | Refresh already-adopted skills from their source repos. |
@@ -97,10 +98,12 @@ uv run agent_sync.py link                              # sync to all agents
   The current `pull`/`sync` commands replace skill folders and can overwrite these
   customizations. Review and preserve local changes before updating their sources.
 
-- Windows symlinks require Developer Mode or an elevated shell. Without it,
-  `link` falls back to tracked copies automatically — no action needed, but
-  re-run `link` from an elevated session later to upgrade fallback copies to
-  real symlinks.
+- Windows symlinks require Developer Mode or an elevated shell. Without them,
+  `link` creates junctions for skill dirs and a hardlink for the instructions
+  file, so edits still hit one file; targets on another volume fall back to a
+  tracked copy. A hardlink can be broken when git rewrites `master/AGENTS.md`;
+  the next `link` restores it. Re-run `link` with Developer Mode enabled to
+  upgrade to real symlinks.
 - A real, unmanaged skill folder already in an agent's `skills_dir` (not
   previously linked from master) is left untouched and reported as `[local]`.
 - Instructions-file conflicts (an agent's file has diverged from master) are

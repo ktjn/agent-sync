@@ -10,7 +10,11 @@ agents:
       master: "AGENTS.md"
     skills_dir: "~/.codex/skills"
   opencode:
-    # no global instructions file found under ~/.config/opencode at migration time
+    # OpenCode V2 loads global instructions from ~/.config/opencode/AGENTS.md
+    # (project AGENTS.md files are discovered separately).
+    instructions:
+      path: "~/.config/opencode/AGENTS.md"
+      master: "AGENTS.md"
     skills_dir: "~/.config/opencode/skills"
   junie:
     # Junie reads project-level .junie/guidelines.md, not a global instructions file;
