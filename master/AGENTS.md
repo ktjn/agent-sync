@@ -13,6 +13,7 @@ Remove code made obsolete by the current change. Verify it is unused; report unr
 
 ## Verbosity
 - write texts as compact as possible, use bullet lists over natural text
+- do not write justifications, rationale, or self-congratulation into markdown files; state the change or fact itself
 
 ## Priorities
 
@@ -105,6 +106,7 @@ For review, debugging, or analysis requests, do not force code changes once find
 - Stay within the requested outcome. Make supporting changes only when required for correctness, safety, or valid verification; explain material additions to scope.
 - Prefer the smallest change that satisfies those constraints. Do not modify working code without clear justification.
 - Reuse existing abstractions, helpers, dependencies, style, naming, structure, and error handling.
+- Do not write code comments. Make the code self-explanatory instead.
 - Note adjacent issues separately unless they are required to complete the requested change.
 - Add dependencies only when necessary. Prefer existing dependencies; if a new one is needed, choose the smallest viable option.
 
