@@ -95,6 +95,11 @@ For review, debugging, or analysis requests, do not force code changes once find
 - If verification fails after your change, diagnose the cause. Continue only while each retry is supported by new evidence and remains within scope; otherwise stop and report the failure.
 - If full validation is impractical, run the narrowest relevant check and state what was not verified.
 
+## Python
+
+- Use `uv` for all Python tooling: `uv run` to execute scripts, tools, and tests (including single-file scripts with PEP 723 inline metadata), `uv venv` for environments, `uv add`/`uv sync` for dependencies.
+- Do not use `pip`, `pipx`, `poetry`, `pipenv`, or `conda` unless the project already depends on them or `uv` is unavailable; state the reason when falling back.
+
 ## Change Constraints
 
 - Stay within the requested outcome. Make supporting changes only when required for correctness, safety, or valid verification; explain material additions to scope.

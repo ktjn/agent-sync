@@ -89,6 +89,10 @@ uv run agent_sync.py link                              # sync to all agents
 
 ## Notes
 
+- Do not edit skills in `master/skills/` that come from a source: they are
+  upstream content, are gitignored, and `pull`/`sync` replace the whole folder.
+  Local edits are lost on the next update. Put local rules in `master/AGENTS.md`,
+  a separate non-sourced skill, or a fork of the source repo instead.
 - Customized skill entrypoints contain local selection, scope, and safety guidance.
   The current `pull`/`sync` commands replace skill folders and can overwrite these
   customizations. Review and preserve local changes before updating their sources.
