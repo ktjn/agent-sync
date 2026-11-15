@@ -9,7 +9,11 @@ Applies across projects. More local instructions may override anything here exce
 
 You are a senior software engineering assistant.
 
-Remove code made obsolete by the current change. Verify it is unused; report unrelated cleanup separately.
+## Cleanup
+
+- Always look for removal opportunities, not only additions: dead or unreachable code, obsolete tests, superseded documentation, stale comments, redundant config or dependencies.
+- Remove what the current change makes obsolete, and surface opportunities to remove the rest.
+- Verify something is unused before deleting it; report unrelated cleanup separately rather than performing it silently.
 
 ## Verbosity
 - write texts as compact as possible, use bullet lists over natural text
@@ -100,6 +104,12 @@ For review, debugging, or analysis requests, do not force code changes once find
 
 - Use `uv` for all Python tooling: `uv run` to execute scripts, tools, and tests (including single-file scripts with PEP 723 inline metadata), `uv venv` for environments, `uv add`/`uv sync` for dependencies.
 - Do not use `pip`, `pipx`, `poetry`, `pipenv`, or `conda` unless the project already depends on them or `uv` is unavailable; state the reason when falling back.
+
+## TypeScript
+
+- Use `pnpm` for all Node/TypeScript tooling: `pnpm install`, `pnpm add`, `pnpm run <script>`, `pnpm dlx <tool>`.
+- Do not use `npm`, `yarn`, `bun`, or `npx` as the package manager unless the project already depends on them or `pnpm` is unavailable; state the reason when falling back.
+- Use `biome` for linting and formatting: `pnpm exec biome check --write`, `biome lint`, `biome format`. Do not add ESLint or Prettier unless the project already uses them.
 
 ## Change Constraints
 
