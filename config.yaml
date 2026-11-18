@@ -63,3 +63,7 @@ sources:
     url: "https://github.com/obra/superpowers.git"
     subdir: "skills"
     mode: multi
+  - name: modern-web-guidance
+    url: "https://github.com/GoogleChrome/modern-web-guidance-src.git"
+    subdir: "skills-src"
+    mode: multi
