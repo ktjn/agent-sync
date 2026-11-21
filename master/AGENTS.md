@@ -136,6 +136,7 @@ For review, debugging, or analysis requests, do not force code changes once find
 - Keep PRs small and scoped to one concern.
 - Do not force-push to main/master.
 - Do not use `--no-verify` or `--no-gpg-sign`. If a hook or signature check blocks a commit, fix the reported cause or report the blocker.
+- Do not add `Co-authored-by` (or similar) trailers for AI assistants or LLMs (e.g. Claude, Copilot, Codex, Gemini). Only the human author is credited.
 
 ## Completion
 
