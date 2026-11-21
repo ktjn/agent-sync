@@ -1,7 +1,8 @@
 # agent-sync
 
 Keep instructions and skills in sync across multiple coding agents (Claude
-Code, Codex, opencode, Junie, pi, Antigravity, ...) from one git-tracked master.
+Code, Codex, Copilot CLI, opencode, Junie, pi, Antigravity, ...) from one
+git-tracked master.
 
 - **One master, many agents.** `master/AGENTS.md` is the canonical
   instructions file; each agent's own instructions file (`CLAUDE.md`,

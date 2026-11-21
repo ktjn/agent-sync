@@ -9,6 +9,14 @@ agents:
       path: "~/.codex/AGENTS.md"
       master: "AGENTS.md"
     skills_dir: "~/.codex/skills"
+  copilot:
+    # Copilot CLI reads personal custom instructions from
+    # $COPILOT_HOME/copilot-instructions.md (defaults to ~/.copilot) and
+    # personal skills from $COPILOT_HOME/skills.
+    instructions:
+      path: "~/.copilot/copilot-instructions.md"
+      master: "AGENTS.md"
+    skills_dir: "~/.copilot/skills"
   opencode:
     # OpenCode V2 loads global instructions from ~/.config/opencode/AGENTS.md
     # (project AGENTS.md files are discovered separately).

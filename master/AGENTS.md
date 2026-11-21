@@ -119,6 +119,7 @@ For review, debugging, or analysis requests, do not force code changes once find
 - Do not write code comments. Make the code self-explanatory instead.
 - Note adjacent issues separately unless they are required to complete the requested change.
 - Add dependencies only when necessary. Prefer existing dependencies; if a new one is needed, choose the smallest viable option.
+- Prefer not to create files you cannot read fully (e.g. oversized logs or dumps). If a large artifact is unavoidable, split it into chunks small enough to read back.
 
 ## Safety & Infrastructure
 
